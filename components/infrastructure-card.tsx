@@ -6,14 +6,14 @@ interface InfrastructureCardProps {
   contenedor: string
   ip: string
   recursos: string
-  estado: "online" | "offline"
+
 }
 
 export function InfrastructureCard({
   contenedor,
   ip,
   recursos,
-  estado,
+
 }: InfrastructureCardProps) {
   return (
     <Card className="border-primary/20">
@@ -49,15 +49,7 @@ export function InfrastructureCard({
           </span>
           <span className="text-xs text-foreground">{recursos}</span>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="text-muted-foreground">Estado</span>
-          <Badge
-            variant={estado === "online" ? "default" : "destructive"}
-            className={estado === "online" ? "bg-green-600 text-white" : ""}
-          >
-            {estado === "online" ? "En línea" : "Fuera de línea"} / Nginx Alpine
-          </Badge>
-        </div>
+
       </CardContent>
     </Card>
   )

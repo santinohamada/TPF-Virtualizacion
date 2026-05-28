@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { FileDown, BookOpen } from "lucide-react"
+import { FileDown, BookOpen, Server, Layout } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProfileHeader } from "@/components/profile-header"
 import { InfrastructureCard } from "@/components/infrastructure-card"
@@ -75,73 +75,123 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto max-w-3xl px-4 py-8">
-        {/* Header con perfil */}
-        <ProfileHeader
-          nombre="Hamada, Santino"
-          dni="45.275.660"
-          carrera="Ingeniería en Sistemas de Información - UTN FRT"
-        />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-200 dark:from-slate-950 dark:to-slate-900 font-sans transition-colors duration-300">
+      <main className="mx-auto max-w-4xl px-4 py-10 sm:py-16">
 
-        {/* Botón de descarga */}
-        <div className="mb-8">
-          <Button size="lg" className="w-full gap-2 text-base md:w-auto">
-            <FileDown className="h-5 w-5" />
-            <a
-              href="/informe-tpf.pdf"
-              download="Informe_TPF_Hamada.pdf"
-            >
-              Descargar Informe de Desarrollo (PDF)
-            </a>
-          </Button>
-        </div>
+        {/* Contenedor Principal (Estilo Tarjeta Elevada) */}
+        <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
 
-        {/* Card de Infraestructura */}
-        <div className="mb-8">
-          <InfrastructureCard
-            contenedor="43432432A"
-            ip="172.16.90.ID"
-            recursos="128MB RAM / 1 CPU Core"
-            estado="online"
-          />
-        </div>
+          {/* Sección Superior: Header y Descarga */}
+          <div className="p-6 sm:p-10 border-b border-slate-100 dark:border-slate-800">
+            <ProfileHeader
+              nombre="Hamada, Santino"
+              dni="45.275.660"
+              carrera="Ingeniería en Sistemas de Información - UTN FRT"
+            />
 
-        {/* Formulario de nueva publicación */}
-        <div className="mb-8">
-          <NewPostForm onPublish={handlePublish} />
-        </div>
-
-        {/* Feed del Blog */}
-        <section>
-          <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold text-foreground">
-            <BookOpen className="h-5 w-5 text-primary" />
-            Publicaciones del Blog
-          </h2>
-          <div className="space-y-4">
-            {isLoading ? (
-              <div className="py-8 text-center text-muted-foreground animate-pulse">
-                Cargando publicaciones desde PostgreSQL...
-              </div>
-            ) : posts.length === 0 ? (
-              <div className="py-8 text-center text-muted-foreground">
-                No hay publicaciones todavía. ¡Sé el primero en escribir una!
-              </div>
-            ) : (
-              posts.map((post) => (
-                <BlogPostCard key={post.id} post={post} onDelete={handleDelete} />
-              ))
-            )}
+            <div className="mt-8 flex justify-center sm:justify-start">
+              <Button
+                size="lg"
+                className="w-full sm:w-auto gap-2 text-base font-medium shadow-md hover:shadow-lg transition-all bg-blue-600 hover:bg-blue-700 text-white rounded-full px-8"
+                asChild
+              >
+                <a href="/informe-tpf.pdf" download="Informe_TPF_Hamada_45275660.pdf">
+                  <FileDown className="h-5 w-5" />
+                  Descargar Informe Técnico (PDF)
+                </a>
+              </Button>
+            </div>
           </div>
-        </section>
+
+          <div className="p-6 sm:p-10 space-y-12">
+
+            {/* Sección de Infraestructura */}
+            <section>
+              <div className="mb-6 flex items-center gap-2 text-xl font-bold text-slate-800 dark:text-slate-100">
+                <Server className="h-6 w-6 text-blue-500" />
+                <h3>Topología e Infraestructura LXC</h3>
+              </div>
+
+              {/* Grilla para mostrar ambos contenedores */}
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="relative group">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
+                  <div className="relative">
+                    <InfrastructureCard
+                      contenedor="45275660A (Blog Personal)"
+                      ip="172.16.90.143"
+                      recursos="128MB RAM / 1 CPU Core / 8GB"
+
+                    />
+                  </div>
+                </div>
+
+                <div className="relative group">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
+                  <div className="relative">
+                    <InfrastructureCard
+                      contenedor="45275660DB (PostgreSQL)"
+                      ip="172.16.90.144"
+                      recursos="128MB RAM / 1 CPU Core / 8GB"
+
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Separador */}
+            <hr className="border-slate-200 dark:border-slate-800" />
+
+            {/* Sección del Blog (Formulario + Feed) */}
+            <section>
+              <div className="mb-6 flex items-center gap-2 text-xl font-bold text-slate-800 dark:text-slate-100">
+                <Layout className="h-6 w-6 text-blue-500" />
+                <h3>Gestión del Blog</h3>
+              </div>
+
+              <div className="mb-10 bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-100 dark:border-slate-800">
+                <NewPostForm onPublish={handlePublish} />
+              </div>
+
+              <div className="flex items-center gap-2 text-lg font-semibold text-slate-700 dark:text-slate-300 mb-6">
+                <BookOpen className="h-5 w-5 text-indigo-500" />
+                Últimas Publicaciones
+              </div>
+
+              <div className="space-y-6 min-h-[200px]">
+                {isLoading ? (
+                  <div className="flex flex-col items-center justify-center py-12 space-y-4 text-slate-500">
+                    <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-blue-500"></div>
+                    <p className="animate-pulse font-medium">Sincronizando con PostgreSQL (172.16.90.144)...</p>
+                  </div>
+                ) : posts.length === 0 ? (
+                  <div className="py-16 text-center bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700">
+                    <p className="text-slate-500 dark:text-slate-400 font-medium">
+                      El feed está vacío. ¡Publica tu primer hito del proyecto!
+                    </p>
+                  </div>
+                ) : (
+                  <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-6">
+                    {posts.map((post) => (
+                      <BlogPostCard key={post.id} post={post} onDelete={handleDelete} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </section>
+
+          </div>
+        </div>
 
         {/* Footer */}
-        <footer className="mt-12 border-t border-border pt-6 text-center text-sm text-muted-foreground">
+        <footer className="mt-8 text-center text-sm font-medium text-slate-500 dark:text-slate-400">
           <p>
-            © 2026 - Trabajo Práctico Final | UTN FRT - Ingeniería en Sistemas de Información
+            © {new Date().getFullYear()} - Trabajo Práctico Final | UTN FRT
           </p>
+          <p className="mt-1">Ingeniería en Sistemas de Información</p>
         </footer>
-      </div>
+      </main>
     </div>
   )
 }

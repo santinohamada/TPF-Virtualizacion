@@ -8,6 +8,7 @@ const nextConfig = {
   },
   output: 'standalone',
   basePath: '/45275660',
+  images: { unoptimized: true },
 }
 
-export default nextConfig
+module.exports = nextConfig;

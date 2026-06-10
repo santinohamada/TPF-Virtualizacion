@@ -16,7 +16,7 @@ export default function HomePage() {
   useEffect(() => {
     async function loadPosts() {
       try {
-        const response = await fetch(`api/posts?t=${Date.now()}`, { cache: "no-store" })
+        const response = await fetch(`/45275660/api/posts?t=${Date.now()}`, { cache: "no-store" })
         if (response.ok) {
           const data = await response.json()
           setPosts(data)
@@ -35,7 +35,7 @@ export default function HomePage() {
   // Publicar un nuevo post vía POST /api/posts
   const handlePublish = async (titulo: string, contenido: string): Promise<boolean> => {
     try {
-      const response = await fetch("api/posts", {
+      const response = await fetch("/45275660/api/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default function HomePage() {
   // Eliminar un post vía DELETE /api/posts?id=...
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`api/posts?id=${id}`, {
+      const response = await fetch(`/45275660/api/posts?id=${id}`, {
         method: "DELETE",
       })
 

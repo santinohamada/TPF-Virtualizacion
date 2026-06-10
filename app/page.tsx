@@ -95,7 +95,7 @@ export default function HomePage() {
                 className="w-full sm:w-auto gap-2 text-base font-medium shadow-md hover:shadow-lg transition-all bg-blue-600 hover:bg-blue-700 text-white rounded-full px-8"
                 asChild
               >
-                <a href="/informe-tpf.pdf" download="Informe_TPF_Hamada_45275660.pdf">
+                <a href="informe-tpf.pdf" download="Informe_TPF_Hamada_45275660.pdf">
                   <FileDown className="h-5 w-5" />
                   Descargar Informe Técnico (PDF)
                 </a>

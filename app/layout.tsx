@@ -17,11 +17,11 @@ export const metadata: Metadata = {
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/icon-dark-32x32.png',
+        url: 'https://tpf-virtualizacion.vercel.app/45275660/icon-dark-32x32.png',
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
+        url: 'https://tpf-virtualizacion.vercel.app/45275660/icon.svg',
         type: 'image/svg+xml',
       },
     ],

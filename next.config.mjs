@@ -8,6 +8,7 @@ const nextConfig = {
   },
   output: 'standalone',
   basePath: '/45275660',
+  assetPrefix: 'https://tpf-virtualizacion.vercel.app',
 }
 
 export default nextConfig;
